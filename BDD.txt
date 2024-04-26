@@ -23,8 +23,25 @@ SET FOREIGN_KEY_CHECKS = 0;
 
 -- Suppression des tables si elles existent déjà
 DROP TABLE IF EXISTS `Subtask`;
+DROP TABLE IF EXISTS `User_Task`;
 DROP TABLE IF EXISTS `Task`;
 DROP TABLE IF EXISTS `User`;
+DROP TABLE IF EXISTS `Role`;
+DROP TABLE IF EXISTS `Points`;
+
+-- Création de la base de données MCHack
+CREATE DATABASE IF NOT EXISTS `MCHack` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
+USE `MCHack`;
+
+-- Désactivation des contraintes de clé étrangère pour la session
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- Suppression des tables si elles existent déjà
+DROP TABLE IF EXISTS `Subtask`;
+DROP TABLE IF EXISTS `User_Task`;
+DROP TABLE IF EXISTS `Task`;
+DROP TABLE IF EXISTS `User`;
+DROP TABLE IF EXISTS `Role`;
 
 -- Création de la base de données MCHack
 CREATE DATABASE IF NOT EXISTS `MCHack` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
@@ -47,22 +64,15 @@ CREATE TABLE `User` (
     FOREIGN KEY (`idRole`) REFERENCES `Role`(`idRole`)
 );
 
--- Insertion des utilisateurs
-INSERT INTO `User` (`identifiant`, `passwordUser`, `email`, `idRole`) VALUES 
-('admin', 'password123', 'admin@example.com', 1),
-('user1', 'password456', 'user1@example.com', 2),
-('user2', 'password789', 'user2@example.com', 2);
-
 -- Création de la table Task
 CREATE TABLE `Task` (
     `idTask` INT PRIMARY KEY AUTO_INCREMENT,
     `label` VARCHAR(255) NOT NULL,
     `description` TEXT,
-    `due_date` DATE,
+    `due_date` DATETIME,
     `status` ENUM('pending', 'in_progress', 'completed') DEFAULT 'pending',
     `priority` ENUM('high', 'medium', 'low') DEFAULT 'medium',
-    `time_spent` TIME DEFAULT '00:00:00',
-    `progress_percentage` INT DEFAULT 0 CHECK (progress_percentage >= 0 AND progress_percentage <= 100)
+    `reward` INT DEFAULT 0
 );
 
 -- Création de la table User_Task pour la liaison entre les utilisateurs et les tâches
@@ -78,12 +88,21 @@ CREATE TABLE `User_Task` (
 CREATE TABLE `Subtask` (
     `idSubtask` INT PRIMARY KEY AUTO_INCREMENT,
     `idTask` INT NOT NULL,
-    `subtask_label` VARCHAR(255) NOT NULL,
-    `due_date` DATE,
+    `label` VARCHAR(255) NOT NULL,
+    `due_date` DATETIME,
     `status` ENUM('pending', 'in_progress', 'completed') DEFAULT 'pending',
+    `reward` INT DEFAULT 0,
     FOREIGN KEY (`idTask`) REFERENCES `Task`(`idTask`)
 );
 
+-- Création de la table Points
+CREATE TABLE `Points` (
+    `idPoint` INT PRIMARY KEY AUTO_INCREMENT,
+    `idUser` INT NOT NULL,
+    `pointsEarned` INT NOT NULL,
+    `dateEarned` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`idUser`) REFERENCES `User`(`idUser`)
+);
 
 -- Réactivation des contraintes de clé étrangère
 SET FOREIGN_KEY_CHECKS = 1;

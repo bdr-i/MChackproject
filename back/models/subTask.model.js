@@ -3,9 +3,11 @@ import pool from "../config/db.js";
 class Subtask {
   constructor(subtask) {
     this.idTask = subtask.idTask;
-    this.subtask_label = subtask.subtask_label;
+    this.label = subtask.label;
     this.due_date = subtask.due_date;
     this.status = subtask.status;
+    this.reward = subtask.reward;
+    this.idTask = subtask.idTask;
   }
 
   static create(newSubtask, result) {
@@ -71,6 +73,42 @@ class Subtask {
       console.log("deleted subtask with id: ", idSubtask);
       result(null, res);
     });
+  }
+
+  static updateById(idSubTask, subTask, result) {
+    pool.query(
+      "UPDATE SubTask SET \
+       label = ?,\
+       due_date = ?,\
+       status = ?,\
+       reward = ?,\
+       idTask = ?,\
+       WHERE idSubTask = ?",
+      [
+        subTask.label,
+        subTask.due_date,
+        subTask.status,
+        subTask.reward,
+        subTask.idTask,
+        idSubTask
+      ],
+      (err, res) => {
+        if (err) {
+          console.log("error: ", err);
+          result(null, err);
+          return;
+        }
+
+        if (res.affectedRows == 0) {
+          // not found Task with the id
+          result({ kind: "not_found" }, null);
+          return;
+        }
+
+        console.log("updated subTask: ", { id: idSubTask, ...subTask });
+        result(null, { id: idSubTask, ...subTask });
+      }
+    );
   }
 
   static removeAll(result) {

@@ -7,8 +7,7 @@ class Task {
     this.due_date = task.due_date;
     this.status = task.status;
     this.priority = task.priority;
-    this.time_spent = task.time_spent;
-    this.progress_percentage = task.progress_percentage;
+    this.reward = task.reward;
   }
 
   static create(newTask, result) {
@@ -59,15 +58,21 @@ class Task {
 
   static updateById(idTask, updatedTask, result) {
     pool.query(
-      "UPDATE Task SET label = ?, description = ?, due_date = ?, status = ?, priority = ?, time_spent = ?, progress_percentage = ? WHERE idTask = ?",
+      "UPDATE Task SET \
+       label = ?,\
+       description = ?,\
+       due_date = ?,\
+       status = ?,\
+       priority = ?,\
+       reward = ?\
+       WHERE idTask = ?",
       [
         updatedTask.label,
         updatedTask.description,
         updatedTask.due_date,
         updatedTask.status,
         updatedTask.priority,
-        updatedTask.time_spent,
-        updatedTask.progress_percentage,
+        updatedTask.reward,
         idTask
       ],
       (err, res) => {

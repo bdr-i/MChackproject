@@ -1,0 +1,35 @@
+-- Jeu de données pour la table Role
+INSERT INTO `Role` (`roleName`) VALUES 
+('Admin'),
+('Utilisateur');
+
+-- Jeu de données pour la table User
+INSERT INTO `User` (`identifiant`, `passwordUser`, `email`, `idRole`) VALUES 
+('admin', 'password123', 'admin@example.com', 1),
+('user1', 'password456', 'user1@example.com', 2),
+('user2', 'password789', 'user2@example.com', 2);
+
+-- Jeu de données pour la table Task
+INSERT INTO `Task` (`label`, `description`, `due_date`, `status`, `priority`, `reward`) VALUES 
+('Tâche 1', 'Description de la tâche 1', '2024-04-30 12:00:00', 'pending', 'medium', 10),
+('Tâche 2', 'Description de la tâche 2', '2024-05-05 15:00:00', 'pending', 'high', 20),
+('Tâche 3', 'Description de la tâche 3', '2024-05-10 10:00:00', 'pending', 'low', 5);
+
+-- Jeu de données pour la table Subtask
+INSERT INTO `Subtask` (`idTask`, `subtask_label`, `due_date`, `status`, `reward`) VALUES 
+(1, 'Sous-tâche 1 de la Tâche 1', '2024-04-30 12:00:00', 'pending', 5),
+(1, 'Sous-tâche 2 de la Tâche 1', '2024-04-30 12:00:00', 'pending', 3),
+(2, 'Sous-tâche 1 de la Tâche 2', '2024-05-05 15:00:00', 'pending', 8),
+(3, 'Sous-tâche 1 de la Tâche 3', '2024-05-10 10:00:00', 'pending', 2);
+
+-- Jeu de données pour la table User_Task (affectation de tâches aux utilisateurs)
+INSERT INTO `User_Task` (`idUser`, `idTask`) VALUES 
+(1, 1),
+(1, 2),
+(2, 1),
+(3, 3);
+
+-- Jeu de données pour la table Points (exemple d'attribution de points à un utilisateur)
+INSERT INTO `Points` (`idUser`, `pointsEarned`, `dateEarned`) VALUES 
+(1, 50, '2024-04-25 08:00:00'),
+(2, 30, '2024-04-26 10:00:00');

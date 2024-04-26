@@ -14,8 +14,7 @@ export const create = (req, res) => {
     due_date: req.body.due_date,
     status: req.body.status,
     priority: req.body.priority,
-    time_spent: req.body.time_spent,
-    progress_percentage: req.body.progress_percentage,
+    reward: req.body.reward,
   });
 
   Task.create(newTask, (err, data) => {
@@ -69,8 +68,7 @@ export const updateById = (req, res) => {
       due_date: req.body.due_date,
       status: req.body.status,
       priority: req.body.priority,
-      time_spent: req.body.time_spent,
-      progress_percentage: req.body.progress_percentage
+      reward: req.body.reward
     },
     (err, data) => {
       if (err) {
