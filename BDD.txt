@@ -1,0 +1,89 @@
+-- --------------------------------------------------------
+-- Hôte:                         127.0.0.1
+-- Version du serveur:           11.3.2-MariaDB - mariadb.org binary distribution
+-- SE du serveur:                Win64
+-- HeidiSQL Version:             12.6.0.6765
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+-- Création de la base de données MCHack
+CREATE DATABASE IF NOT EXISTS `MCHack` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
+USE `MCHack`;
+
+-- Désactivation des contraintes de clé étrangère pour la session
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- Suppression des tables si elles existent déjà
+DROP TABLE IF EXISTS `Subtask`;
+DROP TABLE IF EXISTS `Task`;
+DROP TABLE IF EXISTS `User`;
+
+-- Création de la base de données MCHack
+CREATE DATABASE IF NOT EXISTS `MCHack` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
+USE `MCHack`;
+
+-- Création de la table Role
+CREATE TABLE `Role` (
+    `idRole` INT PRIMARY KEY AUTO_INCREMENT,
+    `roleName` VARCHAR(255) UNIQUE NOT NULL
+);
+
+-- Création de la table User
+CREATE TABLE `User` (
+    `idUser` INT PRIMARY KEY AUTO_INCREMENT,
+    `identifiant` VARCHAR(255) UNIQUE NOT NULL,
+    `passwordUser` VARCHAR(255) NOT NULL,
+    `email` VARCHAR(255) UNIQUE NOT NULL,
+    `idRole` INT NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`idRole`) REFERENCES `Role`(`idRole`)
+);
+
+-- Insertion des utilisateurs
+INSERT INTO `User` (`identifiant`, `passwordUser`, `email`, `idRole`) VALUES 
+('admin', 'password123', 'admin@example.com', 1),
+('user1', 'password456', 'user1@example.com', 2),
+('user2', 'password789', 'user2@example.com', 2);
+
+-- Création de la table Task
+CREATE TABLE `Task` (
+    `idTask` INT PRIMARY KEY AUTO_INCREMENT,
+    `label` VARCHAR(255) NOT NULL,
+    `description` TEXT,
+    `due_date` DATE,
+    `status` ENUM('pending', 'in_progress', 'completed') DEFAULT 'pending',
+    `priority` ENUM('high', 'medium', 'low') DEFAULT 'medium',
+    `time_spent` TIME DEFAULT '00:00:00',
+    `progress_percentage` INT DEFAULT 0 CHECK (progress_percentage >= 0 AND progress_percentage <= 100)
+);
+
+-- Création de la table User_Task pour la liaison entre les utilisateurs et les tâches
+CREATE TABLE `User_Task` (
+    `idUser` INT,
+    `idTask` INT,
+    FOREIGN KEY (`idUser`) REFERENCES `User`(`idUser`),
+    FOREIGN KEY (`idTask`) REFERENCES `Task`(`idTask`),
+    PRIMARY KEY (`idUser`, `idTask`)
+);
+
+-- Création de la table Subtask
+CREATE TABLE `Subtask` (
+    `idSubtask` INT PRIMARY KEY AUTO_INCREMENT,
+    `idTask` INT NOT NULL,
+    `subtask_label` VARCHAR(255) NOT NULL,
+    `due_date` DATE,
+    `status` ENUM('pending', 'in_progress', 'completed') DEFAULT 'pending',
+    FOREIGN KEY (`idTask`) REFERENCES `Task`(`idTask`)
+);
+
+
+-- Réactivation des contraintes de clé étrangère
+SET FOREIGN_KEY_CHECKS = 1;
