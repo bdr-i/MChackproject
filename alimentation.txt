@@ -10,13 +10,13 @@ INSERT INTO `User` (`identifiant`, `passwordUser`, `email`, `idRole`) VALUES
 ('user2', 'password789', 'user2@example.com', 2);
 
 -- Jeu de données pour la table Task
-INSERT INTO `Task` (`label`, `description`, `due_date`, `status`, `priority`, `reward`) VALUES 
-('Tâche 1', 'Description de la tâche 1', '2024-04-30 12:00:00', 'pending', 'medium', 10),
-('Tâche 2', 'Description de la tâche 2', '2024-05-05 15:00:00', 'pending', 'high', 20),
-('Tâche 3', 'Description de la tâche 3', '2024-05-10 10:00:00', 'pending', 'low', 5);
+INSERT INTO `Task` (`label`, `description`, `due_date`, `completed`, `priority`, `reward`) VALUES 
+('Tâche 1', 'Description de la tâche 1', '2024-04-30 12:00:00', '1', 'medium', 10),
+('Tâche 2', 'Description de la tâche 2', '2024-05-05 15:00:00', '1', 'high', 20),
+('Tâche 3', 'Description de la tâche 3', '2024-05-10 10:00:00', '1', 'low', 5);
 
 -- Jeu de données pour la table Subtask
-INSERT INTO `Subtask` (`idTask`, `subtask_label`, `due_date`, `status`, `reward`) VALUES 
+INSERT INTO `Subtask` (`idTask`, `label`, `due_date`, `status`, `reward`) VALUES 
 (1, 'Sous-tâche 1 de la Tâche 1', '2024-04-30 12:00:00', 'pending', 5),
 (1, 'Sous-tâche 2 de la Tâche 1', '2024-04-30 12:00:00', 'pending', 3),
 (2, 'Sous-tâche 1 de la Tâche 2', '2024-05-05 15:00:00', 'pending', 8),

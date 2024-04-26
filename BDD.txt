@@ -70,7 +70,7 @@ CREATE TABLE `Task` (
     `label` VARCHAR(255) NOT NULL,
     `description` TEXT,
     `due_date` DATETIME,
-    `status` ENUM('pending', 'in_progress', 'completed') DEFAULT 'pending',
+    `completed` INT NOT NULL,
     `priority` ENUM('high', 'medium', 'low') DEFAULT 'medium',
     `reward` INT DEFAULT 0
 );

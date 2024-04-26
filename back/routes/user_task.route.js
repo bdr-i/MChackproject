@@ -14,4 +14,5 @@ export default app => {
     // Delete a subtask with id
     router.delete("/:id/:id", remove);
   
+    app.use('/api/user_task', router);
   };

@@ -14,6 +14,8 @@ export const create = (req, res) => {
     email: req.body.email,
     idRole: req.body.idRole
   });
+  console.log(req.body);
+  console.log(newUser);
 
   User.create(newUser, (err, data) => {
     if (err)

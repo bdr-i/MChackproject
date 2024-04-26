@@ -5,7 +5,7 @@ class Task {
     this.label = task.label;
     this.description = task.description;
     this.due_date = task.due_date;
-    this.status = task.status;
+    this.completed = task.completed;
     this.priority = task.priority;
     this.reward = task.reward;
   }
@@ -62,7 +62,7 @@ class Task {
        label = ?,\
        description = ?,\
        due_date = ?,\
-       status = ?,\
+       completed = ?,\
        priority = ?,\
        reward = ?\
        WHERE idTask = ?",
@@ -70,7 +70,7 @@ class Task {
         updatedTask.label,
         updatedTask.description,
         updatedTask.due_date,
-        updatedTask.status,
+        updatedTask.completed,
         updatedTask.priority,
         updatedTask.reward,
         idTask

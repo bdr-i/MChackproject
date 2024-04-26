@@ -36,18 +36,16 @@ class Role {
     });
   }
 
-  static getAll(result) {
+  static getAll() {
     let query = "SELECT * FROM Role";
     
     pool.query(query, (err, res) => {
       if (err) {
         console.log("error: ", err);
-        result(null, err);
         return;
       }
 
       console.log("Roles: ", res);
-      result(null, res);
     });
   }
 

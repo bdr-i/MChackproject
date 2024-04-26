@@ -13,6 +13,9 @@ export const create = (req, res) => {
     idTask: req.body.idTask
   });
 
+  console.log(newUserTask);
+  console.log(req.body);
+
   UserTask.create(newUserTask, (err, data) => {
     if (err)
       res.status(500).send({
