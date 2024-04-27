@@ -5,6 +5,7 @@ class User {
     this.identifiant = user.identifiant;
     this.passwordUser = user.passwordUser;
     this.email = user.email;
+    this.point = user.point;
     this.idRole = user.idRole;
   }
 
@@ -45,11 +46,13 @@ class User {
        identifiant = ?,\
        passwordUser = ?,\
        email = ?,\
+       point= ?,\
        idRole = ?\
        WHERE idUser = ?",
       [user.identifiant,
        user.passwordUser,
        user.email,
+       user.point,
        user.idRole,
        id],
       (err, res) => {

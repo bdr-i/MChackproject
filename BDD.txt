@@ -73,7 +73,8 @@ CREATE TABLE `Task` (
     `due_date` DATETIME,
     `completed` INT NOT NULL,
     `priority` ENUM('high', 'medium', 'low') DEFAULT 'medium',
-    `reward` INT DEFAULT 0
+    `reward` INT DEFAULT 0,
+    `user` VARCHAR(255) NOT NULL
 );
 
 -- Création de la table User_Task pour la liaison entre les utilisateurs et les tâches

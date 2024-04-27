@@ -4,16 +4,16 @@ INSERT INTO `Role` (`roleName`) VALUES
 ('Utilisateur');
 
 -- Jeu de données pour la table User
-INSERT INTO `User` (`identifiant`, `passwordUser`, `email`, `idRole`) VALUES 
-('admin', 'password123', 'admin@example.com', 1),
-('user1', 'password456', 'user1@example.com', 2),
-('user2', 'password789', 'user2@example.com', 2);
+INSERT INTO `User` (`identifiant`, `passwordUser`, `email`, `idRole`, `points`) VALUES 
+('admin', 'password123', 'admin@example.com', 1, 30),
+('user1', 'password456', 'user1@example.com', 2, 50),
+('user2', 'password789', 'user2@example.com', 2,60);
 
 -- Jeu de données pour la table Task
-INSERT INTO `Task` (`label`, `description`, `due_date`, `completed`, `priority`, `reward`) VALUES 
-('Tâche 1', 'Description de la tâche 1', '2024-04-30 12:00:00', '1', 'medium', 10),
-('Tâche 2', 'Description de la tâche 2', '2024-05-05 15:00:00', '1', 'high', 20),
-('Tâche 3', 'Description de la tâche 3', '2024-05-10 10:00:00', '1', 'low', 5);
+INSERT INTO `Task` (`label`, `description`, `due_date`, `completed`, `priority`, `reward`, `user`) VALUES 
+('Tâche 1', 'Description de la tâche 1', '2024-04-30 12:00:00', '1', 'medium', 10, 'nacer'),
+('Tâche 2', 'Description de la tâche 2', '2024-05-05 15:00:00', '1', 'high', 20, 'ines'),
+('Tâche 3', 'Description de la tâche 3', '2024-05-10 10:00:00', '1', 'low', 5, 'abdou');
 
 -- Jeu de données pour la table Subtask
 INSERT INTO `Subtask` (`idTask`, `label`, `due_date`, `status`, `reward`) VALUES 

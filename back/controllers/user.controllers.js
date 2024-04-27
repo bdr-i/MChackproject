@@ -12,6 +12,7 @@ export const create = (req, res) => {
     identifiant: req.body.identifiant,
     passwordUser: req.body.passwordUser,
     email: req.body.email,
+    point: req.body.point,
     idRole: req.body.idRole
   });
   console.log(req.body);
@@ -66,6 +67,7 @@ export const updateById = (req, res) => {
       identifiant: req.body.identifiant,
       passwordUser: req.body.passwordUser,
       email: req.body.email,
+      point: req.body.point,
       idRole: req.body.idRole
     },
     (err, data) => {

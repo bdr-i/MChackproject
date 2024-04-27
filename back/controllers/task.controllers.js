@@ -15,8 +15,8 @@ export const create = (req, res) => {
     completed: req.body.completed,
     priority: req.body.priority,
     reward: req.body.reward,
+    user: req.body.user,
   });
-
   Task.create(newTask, (err, data) => {
     if (err)
       res.status(500).send({
@@ -66,9 +66,10 @@ export const updateById = (req, res) => {
       label: req.body.label,
       description: req.body.description,
       due_date: req.body.due_date,
-      status: req.body.status,
+      completed: req.body.completed,
       priority: req.body.priority,
-      reward: req.body.reward
+      reward: req.body.reward,
+      user : req.body.user
     },
     (err, data) => {
       if (err) {
