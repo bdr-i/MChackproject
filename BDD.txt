@@ -61,6 +61,7 @@ CREATE TABLE `User` (
     `email` VARCHAR(255) UNIQUE NOT NULL,
     `idRole` INT NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `points` INT NOT NULL,
     FOREIGN KEY (`idRole`) REFERENCES `Role`(`idRole`)
 );
 
