@@ -8,6 +8,7 @@ class Task {
     this.completed = task.completed;
     this.priority = task.priority;
     this.reward = task.reward;
+    this.user = task.user;
   }
 
   static create(newTask, result) {
@@ -64,7 +65,8 @@ class Task {
        due_date = ?,\
        completed = ?,\
        priority = ?,\
-       reward = ?\
+       reward = ?,\
+       user = ?\
        WHERE idTask = ?",
       [
         updatedTask.label,
@@ -73,6 +75,7 @@ class Task {
         updatedTask.completed,
         updatedTask.priority,
         updatedTask.reward,
+        updatedTask.user,
         idTask
       ],
       (err, res) => {
