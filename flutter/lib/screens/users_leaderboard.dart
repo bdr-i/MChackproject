@@ -30,6 +30,7 @@ class _UsersLeaderboardScreenState extends State<UsersLeaderboardScreen> {
       final data = jsonDecode(response.body);
       setState(() {
         widget.users = List<User>.from(data.map((user) => User.fromJson(user)));
+        widget.users.sort((a, b) => b.points.compareTo(a.points));
       });
     } else {
       // Handle error
